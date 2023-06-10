@@ -1,0 +1,481 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+
+
+void main() {
+  runApp(NewsApp());
+}
+
+class NewsApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Freak World',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      debugShowCheckedModeBanner: false, 
+      home: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  List<NewsItem> news = [
+    NewsItem(
+      id: '1',
+      title: 'Cultura Anime - Fans de Jujutsu Kaisen temen la muerte de un querido personaje',
+      content: 'Antes de sumergirnos en el misterio que rodea el destino de Satoru Gojo en Jujutsu Kaisen, pongamos en contexto a aquellos que quizás no estén completamente inmersos en el mundo del manga. Jujutsu Kaisen es una serie de manga y anime japonesa que sigue la historia de Yuji Itadori, un estudiante de instituto, y su viaje en el mundo de los Hechiceros de Jujutsu. En este increíble mundo, un personaje se ha destacado: Satoru Gojo. Con sus poderes extraordinarios, Gojo es una fuerza a tener en cuenta. Su “Técnica de Maldición Ilimitada” y el “Vacío Inconmensurable” de su “Expansión Territorial” lo distinguen en un mundo lleno de hechiceros poderosos y maldiciones. ¿Está Gojo muerto? No, pero los adelantos del próximo capítulo del manga revelan que Gojo se encuentra en un estado terrible, algunos lectores incluso lo consideran la muerte del personaje. Gojo no es un hechicero común; es una fuerza poderosa, conocido por sobrevivir batallas peligrosas y salir relativamente ileso. ¿Recuerdas cuando Toji le causó problemas serios, infligiéndole un ataque brutal que dejó a Gojo gravemente herido? A pesar de la gravedad de sus heridas, el querido Gojo logró sobrevivir, demostrando cuán resistente es.',
+      imageUrl: 'https://i0.wp.com/codigoespagueti.com/wp-content/uploads/2023/04/jujutsu-kaisen-manga-gojo-regreso.jpg',
+      section: 'Principal',
+    ),
+    NewsItem(
+      id: '2',
+      title: 'Cultura Anime - Trigger revelará muy pronto un nuevo anime',
+      content: 'Trigger es el renombrado estudio que se encargó de las adoradas series de anime “Cyberpunk: Edgerunners“, “Tengen Toppa Gurren-Lagann” y “Promare“. Gracias a la serie de anime “Cyberpunk: Edgerunners“, el estudio ha recibido numerosos elogios y nuevos fanáticos, y aunque no hay planes para una segunda temporada de esta serie, los fanáticos pueden esperar con ansias el nuevo proyecto de anime de los estudios Trigger. El director y cofundador de Trigger, Hiroyuki Imaishi, está trabajando en un nuevo proyecto de anime que se presentará como adelanto en el evento Anime Expo el próximo 1 de julio de 2023. Hasta el momento, no hay información disponible sobre este nuevo proyecto, pero cabe señalar que el anuncio se realizó en el sitio oficial de Trigger y fue compartido por varias fuentes. La única información disponible hasta ahora es la fecha del evento.',
+      imageUrl: 'https://www3.nhk.or.jp/nhkworld/en/ondemand/video/3021017/images/HCPQT0wDZ8cWo5snqwmBWDdhbF5wrAh0gFSmcPn6.jpeg',
+      section: 'Principal',
+    ),
+    NewsItem(
+      id: '3',
+      title: 'Cultura Anime - La cuarta temporada de Kimetsu no Yaiba ya estaría en producción',
+      content: 'Actualmente se encuentra en emisión Kimetsu no Yaiba: Katanakaji no Sato-hen, la tercera temporada de la ambiciosa adaptación al anime del manga escrito e ilustrado por Koyoharu Gotouge. Con críticas generalmente positivas hacia el trabajo de Ufotable y la historia en general, parece que un popular leaker decidió romper el silencio y revelar una información que quizás no sea sorpresa para nadie. Así fue como el popular leaker Oecuf compartió una actualización afirmando que la cuarta temporada ya se encuentra en producción, aunque evidentemente todavía estamos al pendiente de una confirmación oficial, que podría llegar cuando se emita el episodio final de esta tercera temporada. «No son grandes noticias, pero podemos confirmar que la próxima temporada ya está en producción», escribió la cuenta.',
+      imageUrl: 'https://www.gamerfocus.co/wp-content/uploads/2021/07/KImetsu-no-Yaiba-Demon-Slayer-3.jpg',
+      section: 'Principal',
+    ),
+    NewsItem(
+      id: '4',
+      title: 'Cultura Anime - Jujutsu Kaisen es lo más esperado del Verano-2023',
+      content: 'Dentro de la popular plataforma MyAnimeList hay una forma de saber cuáles son las series más esperadas para cada temporada. Esto es a través de la opción “Plan To Watch“, en donde los usuarios de la plataforma añaden las próximas series a sus listas personales, y MyAnimeList hace una revisión antes de cada nuevo ciclo para publicar un ranking con las series más esperadas de cada temporada. Y eso es precisamente lo que nos reúne hoy, puesto que MyAnimeList compartió el ranking con las series de anime más esperadas para la temporada de Verano-2023 (Julio-Septiembre). Allí podemos ver que la segunda temporada de Jujutsu Kaisen con más de 281 mil miembros inscritos, seguida por la segunda temporada de Mushoku Tensei: Jobless Reincarnation, con más de 185 mil miembros. Esto es una diferencia de más del 51 por ciento, lo que definitivamente es algo significativo.',
+      imageUrl: 'https://i0.wp.com/codigoespagueti.com/wp-content/uploads/2023/05/%C2%BFCuando-se-estrena-el-nuevo-trailer-de-Jujutsu-Kaisen_.jpg',
+      section: 'Principal',
+    ),
+    NewsItem(
+      id: '5',
+      title: 'Cultura Anime - Latinos prefieren ver Spider-Man en japonés que en español',
+      content: 'El tema del doblaje al español latino de la película Spider-Man: Across the Spider-Verse ha sido tendencia en las últimas semanas, sin embargo, debido a que somos un medio enfocado en el anime y no en los cómics, no habíamos tenido la oportunidad de tocarlo, hasta ahora. ¿Cuál es el problema? Resulta que debido al amplio elenco de personajes, en el doblaje al español latino se le dieron varios de estos papeles a “influencers” en lugar de actores de doblaje. Y es que cabe señalar que muchas de estas personas ni siquiera tienen preparación ni experiencia en esta profesión. Entonces, muchas personas en redes sociales están informando de antemano que irán a ver Spider-Man: Across the Spider-Verse en su idioma original con subtítulos, y la presión es tal que las cadenas de cine en México (y posiblemente en el resto de Latinoamérica) ya informaron que la cinta sí estará disponible en este formato. Pero un anuncio reciente ha dejado a los fanáticos en Latinoamérica indecisos, pues parece que ahora estarán interesados en ver la película en japonés en lugar del doblaje latino. Como muchos sabemos, el doblaje japonés (incluyendo también la actuación de voz) es quizás uno de los más reconocidos, y los anuncios para esta nueva entrega del arácnido no hacen más que aumentar la expectativa.',
+      imageUrl: 'https://static1.thegamerimages.com/wordpress/wp-content/uploads/2022/12/spiderverseextendedposter.jpg',
+      section: 'Principal',
+    ),
+  ];
+
+  List<NewsItem> section1News = [
+    NewsItem(
+      id: '1',
+      title: 'Videojuegos - Comienzan las ofertas de verano en la eShop de Switch, con más de 1500 juegos rebajados',
+      content: 'Nintendo ha anunciado que ya han comenzado las ofertas de verano de Nintendo eShop, ronda 1, en las que podemos encontrar más de 1500 juegos con importantes descuentos. La ronda 2 arrancará el 15 de julio, cuando se añadirán más juegos.',
+      imageUrl: 'https://pbs.twimg.com/media/EaUpTfaXkAI5zos?format=jpg&name=large',
+      section: 'Sección 1',
+    ),
+    NewsItem(
+      id: '2',
+      title: 'Videojuegos - Honkai: Star Rail llegará a PlayStation 5 en el cuarto trimestre de 2023',
+      content: 'Honkai: Star Rail, el nuevo videojuego de rol por turnos gratuito de HoYoverse, creadores del popular Genshin Impact, llegará a PlayStation 5 en algún momento del cuarto trimestre de 2023. Como bien sabréis, el título ya está disponible en ordenadores a través de Epic Games Store y teléfonos móviles inteligentes con sistema operativo iOS y Android.',
+      imageUrl: 'https://wotpack.ru/wp-content/uploads/2023/04/1-9.jpg',
+      section: 'Sección 1',
+    ),
+    NewsItem(
+      id: '3',
+      title: 'Videojuegos - CoD Warzone 2.0 anuncia el nuevo mapa Vondel y una colaboración con The Boys',
+      content: 'Los números de Call of Duty: Warzone 2.0 siguen sin mejorar y desde Activision quieren intentar recuperar a los jugadores con poderosas novedades. A pesar de la inclusión de las rankeds y un seguido de skins e ítems exclusivos, la comunidad de este first person shooter sigue desvinculándose del juego debido a las increíbles diferencias con la primera entrega de Warzone y el pasado Modern Warfare (2019), aunque cabe remarcar que en el multijugador las cosas funcionan de forma diferente. En cualquier caso, se ha confirmado que la temporada 4 recibirá el mapa de Vondel para Resurgimiento, Battle Royale y DMZ. ',
+      imageUrl: 'https://wotpack.ru/wp-content/uploads/2022/12/warzone2.jpg',
+      section: 'Sección 1',
+    ),
+    NewsItem(
+      id: '4',
+      title: 'Videojuegos - Bandai Namco anuncia Sand Land, la aventura desértica del creador de Dragon Ball',
+      content: 'Como ya se venía esperando, Bandai Namco publicó durante el marco del Summer Game Fest el primer tráiler de Sand Land, una de las obras más desconocidas de Akira Toriyama que ahora recibe su propia aventura en la industria del videojuego. A priori, si uno nunca se ha acercado jamás a este producto, parece una mezcla entre Mad Max y Dragon Ball con toques fantásticos repletos de criaturas monstruosas. Sand Land se publicó en el año 2000 (del 22 de mayo al 28 de agosto) a través de la revista semanal Weekly Shonen Jump. La historia nos pone en la perspectiva de Rao, un alguacil que emprende un viaje para buscar el "Lago Fantasma". Para ello, cuenta con la ayuda de aliados como Thief o Beelzebub, que le echarán una mano para enfrentarse contra el Ejército del Rey mientras, poco a poco, se descubre origen de la sequía que asola a sus tierras.',
+      imageUrl: 'https://i0.wp.com/news.qoo-app.com/en/wp-content/uploads/sites/3/2023/06/Dragon-Ball-Creators-Sand-Land-is-Getting-a-Video-Game.jpg',
+      section: 'Sección 1',
+    ),
+    NewsItem(
+      id: '5',
+      title: 'Videojuegos - Marvels Spider-Man 2 ya tiene fecha de lanzamiento: Llega el 20 de octubre a PS5',
+      content: 'Durante la gala de Summer Game Fest 2023 se ha anunciado la fecha de lanzamiento de Marvels Spider-Man 2. Ha sido la propia Insomniac Games la que se ha pasado por el evento para confirmar el día exacto a partir del que podremos jugarlo en PS5: estará disponible el 20 de octubre. En un artículo publicado en el blog oficial de PlayStation tras su aparición en el evento, Insomniac Games ha informado de que la secuela de Marvels Spider-Man se pondrá a la venta a un precio de 79,99 € en España para su edición estándar, aunque habrá dos ediciones más (una Digital Deluxe y otra coleccionista). Todas se podrán reservar la semana que viene (16 de junio).',
+      imageUrl: 'https://live.staticflickr.com/65535/52923139721_da79f531d0_h.jpg',
+      section: 'Sección 1',
+    ),
+  ];
+
+  List<NewsItem> section2News = [
+    NewsItem(
+      id: '1',
+      title: 'Preguntas Frecuentes - Definicion de "Freak" o "Friki"',
+      content: 'Es un término coloquial que se utiliza para referirse a una persona cuyas aficiones, comportamiento o vestuario son inusuales, Al conjunto de los frikis o seguidores de la cultura friki se le suele denominar fandom. En el año 2012, la Real Academia Española añadió el término «friki» en la vigésima tercera edición de su diccionario, quedando definido con tres acepciones, siendo una de ellas la referida a «toda persona que practica desmesurada y obsesivamente una afición».',
+      imageUrl: 'https://estaticos-cdn.prensaiberica.es/clip/0063746e-cdf5-47f6-8857-b56b4e416655_16-9-aspect-ratio_default_0.jpg',
+      section: 'Sección 2',
+    ),
+    NewsItem(
+      id: '2',
+      title: 'Preguntas Frecuentes - ¿Cuáles son las principales características de las personas que forman parte de la cultura freak?',
+      content: 'Las personas que forman parte de la cultura freak suelen ser aficionadas a temas como la ciencia ficción, el cine de culto, los cómics, los videojuegos, la tecnología y otras áreas consideradas fuera de lo común. También tienden a ser muy apasionadas, creativas y abiertas a la diversidad.',
+      imageUrl: 'https://s2.lanzadigital.com/wp-content/uploads/2015/05/Lobuenoymalodeserfri_52581_9174-569x427.jpg',
+      section: 'Sección 2',
+    ),
+    NewsItem(
+      id: '3',
+      title: 'Preguntas Frecuentes - ¿Cuál es la diferencia entre un geek y un freak?',
+      content: 'La diferencia entre un geek y un freak puede ser sutil y, a menudo, depende del contexto. En general, un geek se enfoca más en áreas específicas del conocimiento o la tecnología, mientras que un freak tiene intereses más amplios y abarca un rango más amplio de elementos considerados extraños o poco convencionales.',
+      imageUrl: 'https://p2.trrsf.com/image/fget/cf/1200/1200/middle/images.terra.com/2021/07/05/36-redsoc-geek-01-07-2021.png',
+      section: 'Sección 2',
+    ),
+    NewsItem(
+      id: '4',
+      title: 'Preguntas Frecuentes - ¿Cuáles son los principales intereses o pasatiempos de las personas que se consideran parte de la cultura freak?',
+      content: 'Algunos de los principales intereses y pasatiempos de las personas en la cultura freak incluyen coleccionar objetos de películas, cómics o videojuegos, asistir a convenciones de cultura pop, participar en juegos de rol, ver y discutir películas y series de culto, explorar la música alternativa y disfrutar de la creatividad en todas sus formas.',
+      imageUrl: 'https://img.chilango.com/2022/05/lugares-frikis-cdmx.png',
+      section: 'Sección 2',
+    ),
+    NewsItem(
+      id: '5',
+      title: 'Preguntas Frecuentes - ¿Cuál es la importancia de la cultura freak en la sociedad actual?',
+      content: 'La cultura freak ha ganado relevancia en la sociedad actual al convertirse en una plataforma de expresión, inclusión y creatividad. Además de ser una forma de entretenimiento, ha generado comunidades y subculturas que fomentan la diversidad, el intercambio de ideas y la aceptación de lo diferente. También ha influido en diversos campos, como el cine, la moda, la tecnología y el arte, dejando una huella significativa en la cultura popular contemporánea.',
+      imageUrl: 'https://www.elsoldeleon.com.mx/doble-via/9epn5u-dia-del-orgullo-friki/ALTERNATES/LANDSCAPE_768/D%C3%ADa-del-Orgullo-Friki',
+      section: 'Sección 2',
+    ),
+  ];
+
+  List<NewsItem> filteredNews = [];
+  List<NewsItem> favorites = [];
+  bool isSearching = false;
+
+  void toggleFavorite(NewsItem newsItem) {
+    setState(() {
+      if (favorites.contains(newsItem)) {
+        favorites.remove(newsItem);
+      } else {
+        favorites.add(newsItem);
+      }
+    });
+  }
+
+  void searchNews(String query) {
+    setState(() {
+      if (query.isEmpty) {
+        filteredNews = [];
+        isSearching = false;
+      } else {
+        filteredNews = news
+            .where((newsItem) =>
+                newsItem.title.toLowerCase().contains(query.toLowerCase()))
+            .toList();
+        isSearching = true;
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: isSearching ? _buildSearchField() : Text('Freak World'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              setState(() {
+                isSearching = !isSearching;
+                if (!isSearching) {
+                  filteredNews = [];
+                }
+              });
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.favorite),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => FavoritesScreen(
+                    favorites: favorites,
+                    toggleFavorite: toggleFavorite,
+                  ),
+                ),
+              );
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SettingsScreen(),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+      body: _buildNewsList(),
+      bottomNavigationBar: _buildBottomNavigationBar(),
+    );
+  }
+
+  Widget _buildSearchField() {
+    return TextField(
+      autofocus: true,
+      decoration: InputDecoration(
+        hintText: 'Buscar...',
+        border: InputBorder.none,
+      ),
+      onChanged: searchNews,
+    );
+  }
+
+  Widget _buildNewsList() {
+    final List<NewsItem> displayedNews =
+        isSearching ? filteredNews : news;
+
+    return ListView.builder(
+      itemCount: displayedNews.length,
+      itemBuilder: (BuildContext context, int index) {
+        final NewsItem item = displayedNews[index];
+        final isFavorite = favorites.contains(item);
+
+        return ListTile(
+          title: Text(item.title),
+          trailing: IconButton(
+            icon: Icon(
+              isFavorite ? Icons.favorite : Icons.favorite_border,
+              color: isFavorite ? Colors.red : null,
+            ),
+            onPressed: () {
+              toggleFavorite(item);
+            },
+          ),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => NewsDetailScreen(newsItem: item),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Widget _buildBottomNavigationBar() {
+    return BottomNavigationBar(
+      currentIndex: 0,
+      items: [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Cultura Anime',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.catching_pokemon),
+          label: 'Videojuegos',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.question_answer),
+          label: 'Preguntas frecuentes',
+        ),
+      ],
+      onTap: (index) {
+        if (index == 1) {
+          navigateToSection(context, 'Sección 1');
+        } else if (index == 2) {
+          navigateToSection(context, 'Sección 2');
+        }
+      },
+    );
+  }
+
+  void navigateToSection(BuildContext context, String section) {
+    List<NewsItem> sectionNews;
+    if (section == 'Sección 1') {
+      sectionNews = section1News;
+    } else if (section == 'Sección 2') {
+      sectionNews = section2News;
+    } else {
+      sectionNews = news;
+    }
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SectionScreen(
+          sectionNews: sectionNews,
+          favorites: favorites,
+          toggleFavorite: toggleFavorite,
+        ),
+      ),
+    );
+  }
+}
+
+class NewsItem {
+  final String id;
+  final String title;
+  final String content;
+  final String imageUrl;
+  final String section;
+
+  NewsItem({
+    required this.id,
+    required this.title,
+    required this.content,
+    required this.imageUrl,
+    required this.section,
+  });
+}
+
+class NewsDetailScreen extends StatelessWidget {
+  final NewsItem newsItem;
+
+  const NewsDetailScreen({required this.newsItem});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(newsItem.title),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (newsItem.imageUrl != null)
+              Image.network(
+                newsItem.imageUrl,
+                fit: BoxFit.cover,
+              ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                newsItem.content,
+                style: TextStyle(fontSize: 18.0),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SectionScreen extends StatelessWidget {
+  final List<NewsItem> sectionNews;
+  final List<NewsItem> favorites;
+  final Function toggleFavorite;
+
+  const SectionScreen({
+    required this.sectionNews,
+    required this.favorites,
+    required this.toggleFavorite,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Secciones'),
+      ),
+      body: ListView.builder(
+        itemCount: sectionNews.length,
+        itemBuilder: (BuildContext context, int index) {
+          final NewsItem item = sectionNews[index];
+          final isFavorite = favorites.contains(item);
+
+          return ListTile(
+            title: Text(item.title),
+            trailing: IconButton(
+              icon: Icon(
+                isFavorite ? Icons.favorite : Icons.favorite_border,
+                color: isFavorite ? Colors.red : null,
+              ),
+              onPressed: () {
+                toggleFavorite(item);
+              },
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => NewsDetailScreen(newsItem: item),
+                ),
+              );
+            },
+          );
+        },
+      ),
+    );
+  }
+}
+
+class FavoritesScreen extends StatelessWidget {
+  final List<NewsItem> favorites;
+  final Function toggleFavorite;
+
+  const FavoritesScreen({
+    required this.favorites,
+    required this.toggleFavorite,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (favorites.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('Favoritos'),
+        ),
+        body: Center(
+          child: Text('No hay noticias favoritas.'),
+        ),
+      );
+    } else {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('Favoritos'),
+        ),
+        body: ListView.builder(
+          itemCount: favorites.length,
+          itemBuilder: (BuildContext context, int index) {
+            final NewsItem item = favorites[index];
+
+            return ListTile(
+              title: Text(item.title),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => NewsDetailScreen(newsItem: item),
+                  ),
+                );
+              },
+            );
+          },
+        ),
+      );
+    }
+  }
+}
+
+class SettingsScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Configuraciones'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+           Text('No hay configuraciones por el momento o se mantienen en WIP'),
+          ],
+        ),
+      ),
+    );
+  }
+}
